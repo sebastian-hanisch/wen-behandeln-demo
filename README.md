@@ -1,7 +1,6 @@
 # Wen behandeln? – Auswahl nach dem Piloten und der Gewinner-Fluch – Streamlit-Demo
 
-<!-- TODO nach dem Deploy: direkt hierher den Live-Link setzen (Leerzeile davor und danach):
-**[→ Demo live ausprobieren](https://sebastianhanisch-wen-behandeln-demo.streamlit.app/)** -->
+**[→ Demo live ausprobieren](https://sebastianhanisch-wen-behandeln-demo.streamlit.app/)**
 
 Interaktive Demo zur **Auswahl der Standorte, an denen eine neue Regel eingeführt wird**. **Dreizehntes Stück der Konzepte-Linie „Experimente und Wirkungsmessung“** im Portfolio von
 [Sebastian Hanisch](https://sebastianhanisch.net) (Operations Research und Machine Learning): ein Verfahren, ein wachsendes Beispiel, jedes Stück hebt eine Annahme auf. Die Vorgänger fragen, ob
