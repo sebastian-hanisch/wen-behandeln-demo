@@ -12,10 +12,10 @@ Fenster); der Pilot zieht m Fenster je Standort und Arm mit Zurücklegen aus den
                  Effekt und Streuung sind dadurch nur schwach gekoppelt (Korrelation im Median etwa -0,2, nicht null).
   wechselwirkung z_B = 1,0 + 0,8 * s(u) * s(v) (s = steile Sigmoide um 0,5) mit zwei beobachteten Merkmalen u, v: großer Effekt nur, wenn u UND v hoch
                  sind. **Gesetzte Zuordnung der Regelstärke, kein Ergebnis des Vehikels.** Fensterlänge zufällig wie in "glatt".
-  homogen        alle Standorte gleich (Standardstandort, z_B = 1,4, Fenster 28 Tage), alle Merkmale Rotheringe.
+  homogen        alle Standorte gleich (Standardstandort, z_B = 1,4, Fenster 28 Tage), alle Merkmale reine Rauschmerkmale (Noise Features).
   falle          Vehikel pur: Wiederbeschaffungszeit, Dispersion und Tagesmittel je Standort aus Gittern, Fenster 28 Tage; Effekt und Streuung hängen
                  zusammen (gemessen in der README).
-Beobachtet wird je Standort X mit 4 Spalten (die Merkmale der Welt, der Rest Rotheringe aus der Standardnormalverteilung)."""
+Beobachtet wird je Standort X mit 4 Spalten (die Merkmale der Welt, der Rest Rauschmerkmale aus der Standardnormalverteilung)."""
 
 import functools
 from dataclasses import dataclass

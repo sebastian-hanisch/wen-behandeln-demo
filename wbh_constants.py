@@ -33,10 +33,10 @@ WELT_LABEL = {
 }
 WELT_KURZ = {"glatt": "glatt", "wechselwirkung": "Wechselwirkung", "homogen": "Null-Welt", "falle": "Falle"}
 WELT_FEATURES = {
-    "glatt": ("Sicherheitsfaktor z_B", "Rotheringe 1", "Rotheringe 2", "Rotheringe 3"),
-    "wechselwirkung": ("Merkmal u", "Merkmal v", "Rotheringe 1", "Rotheringe 2"),
-    "homogen": ("Rotheringe 1", "Rotheringe 2", "Rotheringe 3", "Rotheringe 4"),
-    "falle": ("Wiederbeschaffungszeit", "ln(Dispersion)", "Tagesmittel", "Rotheringe"),
+    "glatt": ("Sicherheitsfaktor z_B", "Rauschmerkmal 1", "Rauschmerkmal 2", "Rauschmerkmal 3"),
+    "wechselwirkung": ("Merkmal u", "Merkmal v", "Rauschmerkmal 1", "Rauschmerkmal 2"),
+    "homogen": ("Rauschmerkmal 1", "Rauschmerkmal 2", "Rauschmerkmal 3", "Rauschmerkmal 4"),
+    "falle": ("Wiederbeschaffungszeit", "ln(Dispersion)", "Tagesmittel", "Rauschmerkmal"),
 }
 RHO_STRONG = 0.8                                # ab diesem Betrag der Korrelation gilt die Kopplung als eng
 RHO_LIMIT = 0.3                                 # Betrag der Pearson-Korrelation, unter dem Effekt und Streuung als nur schwach gekoppelt gelten
@@ -92,7 +92,7 @@ PRESET_HELP = {
     "Größerer Pilot": "Dieselbe Welt mit 32 Fenstern je Standort und Arm: die Überschätzung der Gewählten ist deutlich kleiner.",
     "Nur Rauschen (Null-Welt)": "Alle Standorte haben denselben Effekt. Die zehn Gewählten wirken im Piloten trotzdem weit über dem Durchschnitt: reines Rauschen.",
     "Schrumpfung als Gegenmittel": "Glatte Welt, 16 Fenster je Standort und Arm: die Schrumpfung zum Gesamtmittel (Empirical Bayes) senkt die Überschätzung der Gewählten.",
-    "Wechselwirkung: Wälder": "Der Effekt entsteht nur, wenn zwei Merkmale zugleich hoch sind (gesetzte Annahme): bei 30 % Budget und m = 8 ordnet ein Wald über die Merkmale besser als eine Gerade.",
+    "Wechselwirkung: Wälder": "Der Effekt entsteht nur, wenn zwei Merkmale zugleich hoch sind (gesetzte Annahme): bei 30 % Budget und m = 8 ordnet ein Random Forest über die Merkmale besser als eine Gerade.",
     "Die Falle: Streuung verrät den Effekt": "Effekt und Streuung der Fenster hängen im Vehikel eng zusammen: die Schrumpfung, die je Standort nach der Streuung zieht, schneidet hier bei 10 % Budget schlechter ab als die Rohdifferenz.",
 }
 
@@ -118,5 +118,5 @@ def fmt_pct(x, digits=0):
     """Zahl, die schon in Prozent steht, mit Prozentzeichen: 63 -> '63 %'."""
     return f"{x:.{digits}f}".replace(".", ",") + " %"
 
-# Blattgröße des Waldes je Pilotumfang (abgestimmt auf getrennten Populationen und Zufalls-Seeds, tools/messreihe.py tune)
+# Blattgröße des Random Forests je Pilotumfang (abgestimmt auf getrennten Populationen und Zufalls-Seeds, tools/messreihe.py tune)
 LEAF_BY_M = {1: 10, 2: 10, 4: 10, 8: 10, 16: 10, 32: 10, 64: 5}

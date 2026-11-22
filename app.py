@@ -73,7 +73,7 @@ with st.expander("So funktioniert die Auswahl nach dem Piloten", expanded=True):
         """
 1. **Pilot:** an jedem der 100 Standorte laufen **m Fenster** (in den Welten glatt und Wechselwirkung je Standort 7 bis 224 Tage, sonst 28 Tage) mit Regel A und m Fenster mit Regel B; je Standort und Arm zählt der Mittelwert des Servicegrads.
 2. **Schätzen:** die Differenz B minus A je Standort ist die **Rohdifferenz**. Die Alternativen **schrumpfen** sie zum Gesamtmittel (Empirical Bayes) oder **erklären** sie aus den Merkmalen des Standorts
-   (Regression, Wald).
+   (Regression, Random Forest).
 3. **Auswählen:** die **k Standorte mit dem größten geschätzten Effekt** bekommen Regel B (Budget). Oder: jeder Standort mit einer Schätzung über der **Behandlungsschwelle** bekommt sie.
 4. **Bewerten:** die Standorte sind simuliert, der **wahre Effekt** je Standort ist bekannt (Mittel eines großen Pools von Fenstern). So lässt sich messen, was der Pilot den Gewählten zuschreibt und was sie wirklich bringen.
         """
@@ -267,11 +267,11 @@ st.markdown(
 |---|---|---|
 | **Der wahre Effekt je Standort ist das Mittel seines Pools** ({C.POOL_SIZE} vorgerechnete Fenster; Standorte gleichen Typs teilen sich einen Pool) | Der Pilot zieht mit Zurücklegen aus dem Pool: Standorte gleichen Typs haben exakt denselben wahren Effekt. In einem echten Betrieb gibt es keinen Pool, die Wahrheit bleibt unbekannt. | – |
 | **Regel B ist an manchen Standorten gleich A** | In der Welt „glatt“ ist z_B an 1 von 9 Werten gleich 1,0 (11,9 % der Standorte der 20 Messpopulationen), in der Welt „Wechselwirkung“ an 46,8 %: dort ist der wahre Effekt exakt null. | – |
-| **Die Welt „Wechselwirkung“ ist gesetzt** | Dass der Effekt nur bei zwei zugleich hohen Merkmalen auftritt, ist **eine Annahme dieser Demo**, kein Ergebnis des Vehikels; der Vorteil der Wälder gilt für diese Annahme und nur bei bestimmten Budgets und Pilotumfängen (30 % Budget ab m = 4, 50 % ab m = 16, 10 % erst bei m = 64). | – |
+| **Die Welt „Wechselwirkung“ ist gesetzt** | Dass der Effekt nur bei zwei zugleich hohen Merkmalen auftritt, ist **eine Annahme dieser Demo**, kein Ergebnis des Vehikels; der Vorteil des Random Forests gilt für diese Annahme und nur bei bestimmten Budgets und Pilotumfängen (30 % Budget ab m = 4, 50 % ab m = 16, 10 % erst bei m = 64). | – |
 | **Effekt und Streuung sind nur schwach gekoppelt** (Welten „glatt“, „Wechselwirkung“) | Kurze Fenster haben einen etwas kleineren Effekt und eine größere Streuung: die Korrelation ist im Median {C.fmt_num(rho_g[0], 2)} und {C.fmt_num(rho_w[0], 2)}, in allen 40 Populationen negativ, und in {over_g} von {C.N_POP} bzw. {over_w} von {C.N_POP} Populationen mindestens {C.fmt_num(C.RHO_LIMIT, 1)} im Betrag. Die Falle-Welt zeigt, was bei enger Kopplung passiert. | Schrumpfung (Falle) |
 | **Der Pilotumfang m ist für alle Standorte und Arme gleich und kostet nichts** | Ein größerer Pilot kostet in der Wirklichkeit Fenster, in denen Regel A oder B an einem Standort gefahren wird; die Demo wägt das nicht ab. | Teststärke, Bandit |
 | **Jede Umstellung kostet gleich viel** | Bei ungleichen Kosten je Standort (Rucksack) ist nicht mehr der Effekt allein die Rangfolge; das wurde hier nicht gemessen. | – |
-| **Die Einstellungen der Schätzer gelten für die gemessene Regel** | Die Blattgröße des Waldes ist je Pilotumfang auf getrennten Populationen abgestimmt (am Rand des Gitters), die Schrumpfung ist der Momentenschätzer. Aussagen gelten nicht für die ganze Verfahrensklasse. | – |
+| **Die Einstellungen der Schätzer gelten für die gemessene Regel** | Die Blattgröße des Random Forests ist je Pilotumfang auf getrennten Populationen abgestimmt (am Rand des Gitters), die Schrumpfung ist der Momentenschätzer. Aussagen gelten nicht für die ganze Verfahrensklasse. | – |
 | **Die Schrumpfung ist bei kleinem m oft nicht verwertbar** | Bei m = 2 ist in {C.fmt_pct(100 * min(_kol))} bis {C.fmt_pct(100 * max(_kol))} der Piloten (je nach Welt, ohne Null-Welt) die geschätzte Streuung null; die Auswahl ist dann Zufall. | – |
 | **Ein Budget von 80 % wird nicht angeboten** | Bei der Rohdifferenz lag der Fang-Anteil bei 80 % und kleinem m in der Falle-Welt unter null (schlechter als Zufall), in den anderen Welten nicht; die Ursache ist nicht untersucht. | – |
 """
